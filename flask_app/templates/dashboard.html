@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<style>
+    body{
+    width: 800px;
+    align-items: center;
+    margin: 0 auto;
+}
+
+    .header{
+        width: 800px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    h1{
+        margin: 20px;
+    }
+    .uppertag{
+        margin: 15px;
+        padding: 10px;
+        display: block;
+    }
+
+
+    .table {
+        border: 1px solid black;
+    }
+</style>
+<body>
+    <div class="header">
+        <h1>Sasquatch Websighting</h1>
+
+            <div class="uppertag">
+                <h2>{{user.first_name + " " + user.last_name}}</h2>
+                <a href="/dashboard/new" class="btn btn-primary">Report a Sighting</a>&nbsp &nbsp <br><br> 
+                <a href="/logout" class="btn btn-primary">Logout</a>
+            </div>
+    </div>
+    <h3>Reported Sightings</h3>
+    <div class="table">
+        <table class="table">
+            <tbody>
+                {% for each_sighting in all_sightings %}
+                    <tr>
+                        <td>{{ each_sighting.location }}</td> - <td>{{ each_sighting.created_at }}</td>
+                        <td>Reported by: {{ each_sighting.created.first_name + " " + each_sighting.created.last_name  }}</td> 
+                        <td><a href="show/{{each_sighting.id}}" class="btn btn-primary">View </a></td>
+                        <td>
+                            {% if session['user_id'] == each_sighting.created.id %}
+                                <a href="/edit/{{each_sighting.id}}" class="btn btn-success">Edit</a>
+                                <a href="/delete/{{each_sighting.id}}" class="btn btn-danger">delete</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

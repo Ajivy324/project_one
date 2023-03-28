@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sighting View</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<style>
+    .header{
+        width: 800px;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .contain{
+        width: 800px;
+        margin: 0 auto;
+        background-color: azure;
+    }
+    h1{
+        margin: 20px;
+    }
+    .uppertag{
+        margin: 25px;
+        padding: 10px;
+    }
+    .number_of{
+        display: flex;
+    }
+
+</style>
+<body>
+    <div class="header">
+        <h1>Sasquatch Websighting</h1>
+
+            <div class="uppertag">
+                <h2>{{user.first_name + " " + user.last_name}}</h2>
+                <a href="/dashboard" class="btn btn-primary">Dashboard</a>&nbsp &nbsp <br><br>
+                <a href="/logout" class="btn btn-primary">Logout</a>
+            </div>
+    </div>
+    <div class="contain">
+        <div>
+            <h2>{{each_sighting.location}} on {{each_sighting.created_at}}</h2>
+        </div>
+        <div class="content">
+            <p>What Happended:</p>
+            <p>{{ each_sighting.what_happend }}</p>
+            <div class="number_of">
+                <p># of Sasquatches:</p>&nbsp
+                <p>{{ each_sighting.number_of }}</p>
+            </div>
+            <p>Reported By: {{ each_sighting.created.first_name + " " + each_sighting.created.last_name }}</p>
+        </div>
+    </div>
+</body>
+</html>

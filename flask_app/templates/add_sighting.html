@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Sighting</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<style>
+    .header{
+        width: 800px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .container{
+        width: 800px;
+        margin: 0 auto;
+    }
+
+</style>
+<body>
+    <div class="header">
+        <h1>Sasquatch Websighting</h1>
+
+            <div class="uppertag">
+                <h2>{{user.first_name + " " + user.last_name}}</h2>
+                <a href="/dashboard" class="btn btn-primary">Dashboard</a>&nbsp &nbsp <br><br> 
+                <a href="/logout" class="btn btn-primary">Logout</a>
+            </div>
+    </div>
+    <div class="container">
+        <div>
+            <h3>Report a Sighting</h3>
+        </div>
+        <form action="/dashboard/add" method="POST">
+            {% with messages = get_flashed_messages(category_filter=['new']) %}     
+                {% if messages %}                            
+                    {% for message in messages %}            
+                        <p>{{message}}</p>                   
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <textarea name="location" cols="10" rows="1" class="form-control" aria-describedby="emailHelp"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="what_happend">What Happened:</label>
+                <textarea name="what_happend" cols="20" rows="5" class="form-control" aria-describedby="emailHelp"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="created_at">Date of Siting:</label>
+                <input type="date" name="created_at" id="exampleInputEmail1" aria-describedby="emailHelp" >
+            </div>
+            <div class="form-group">
+                <label for="number_of"># of Sasquatches</label>
+                <input type="number"  name="number_of" min="1" max="10">
+            </div>
+            <button type="submit" class="btn btn-success">Report</button>
+        </form>
+    </div>        
+</body>
+</html>
